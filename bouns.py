@@ -1,7 +1,7 @@
 weather_data = {}
 
 def is_number(text):
-   
+    '''checks that the text is a valid number'''
     text = text.strip()
     if text.startswith("-"):
         text = text[1:]
@@ -11,7 +11,7 @@ def is_number(text):
 
 
 def is_valid_date(text):
- 
+    '''checks that the date is in the format YYYY-MM-DD and that it really exists, including leap years.'''
     parts = text.split("-")
     if len(parts) != 3:
         return False
@@ -37,7 +37,9 @@ def is_valid_date(text):
 
 
 def get_weather_values():
-    
+    '''
+    asks for the temperature, humidity, and condition, keeps asking until each is valid, and returns them as a dictionary. 
+    Adding and updating both use it'''
     while True:
         temperature = input("Enter the temperature : ").strip()
         if is_number(temperature):
@@ -67,7 +69,7 @@ def get_weather_values():
 
 
 def information_wather():
-   
+    '''asks for the city and date, gets the weather values, and saves everything in the nested dictionary.'''
     while True:
         city_name = input("enter the city name : ").strip().lower()
         if city_name.replace(" ", "").isalpha():
@@ -93,8 +95,8 @@ def information_wather():
 
 
 def query_by_city():
+    '''asks for a city and prints all the saved weather data for it'''
     city_name = input("enter the city name : ").strip().lower()
-
     if city_name not in weather_data:
         print("no data for this city")
         return
@@ -106,6 +108,7 @@ def query_by_city():
 
 
 def update_weather():
+    ''' asks for a city and date, and if the entry exists, replaces its values with new ones.'''
     city_name = input("enter the city name : ").strip().lower()
     date = input("Enter date (YYYY-MM-DD) : ").strip()
 
@@ -118,6 +121,7 @@ def update_weather():
 
 
 def delete_weather():
+    '''asks for a city and date, and deletes that entry. If the city has no dates left, it deletes the city too.'''
     city_name = input("enter the city name : ").strip().lower()
     date = input("Enter date (YYYY-MM-DD) : ").strip()
 
@@ -128,7 +132,6 @@ def delete_weather():
         print("data deleted")
     else:
         print("this city or date is not found")
-
 
 
 while True:
